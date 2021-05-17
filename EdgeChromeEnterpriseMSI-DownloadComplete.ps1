@@ -227,5 +227,5 @@ Write-Host "-- Function Completed: File Downloaded -- " -ForegroundColor Green
 }
 
 
-.\Get-EdgeEnterpriseMSI.ps1 -Channel Stable -Platform Windows -Architecture x64 -Folder "$env:USERPROFILE\Downloads\" -Force
+Get-EdgeEnterpriseMSI.ps1 -Channel Stable -Platform Windows -Architecture x64 -Folder "$env:USERPROFILE\Downloads\" -Force
 
