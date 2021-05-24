@@ -1,6 +1,5 @@
 #GetMyScriptF.ps1
-Function Get-MyScript ()
-{ Param ( [string]$AFile,[string]$SaveLocation = "$env:USERPROFILE\Downloads\" )
+Function Get-MyScript { Param ( [string]$AFile,[string]$SaveLocation = "$env:USERPROFILE\Downloads\" )
   Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/TestRepo/main/$AFile"  -Outfile "$SaveLocation$AFile" }
   
 Get-MyScript "Chrome-Download+Run-Installer.ps1"
