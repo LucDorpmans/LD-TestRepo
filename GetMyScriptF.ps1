@@ -1,7 +1,6 @@
 #GetMyScriptF.ps1
-Function Get-MyScript 
-{    [CmdletBinding()]
-    Param    ( 
+Function Get-MyScript ()
+{ Param    ( 
         [Parameter(Mandatory=$true,Position=0)]
         [string]$AFile,
         [string]$SaveLocation = "$env:USERPROFILE\Downloads\"     )
