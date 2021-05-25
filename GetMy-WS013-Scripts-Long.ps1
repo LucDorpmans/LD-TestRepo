@@ -5,11 +5,11 @@ Function Get-MyScript
         [Parameter(Mandatory=$true,Position=0)]
         [string]$AFile,
         [string]$SaveLocation = "$env:USERPROFILE\Downloads\", 
-		[switch]$EditScript = $True )
-        Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/My-WS-013-Repo.git/main/$AFile"  -Outfile "$SaveLocation$AFile" 
-		If ($EditScript) { PSEdit  ("$SaveLocation$AFile" )} }
+		[switch]$EditFile = $False )
+        Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/My-WS-013-Repo/main/$AFile"  -Outfile "$SaveLocation$AFile" 
+		If ($EditFile) { PSEdit  ("$SaveLocation$AFile" )} }
 
-Get-MyScript "Chrome-Download+Run-Installer.ps1"
-Get-MyScript "WAC-Download+Install.ps1"
-Get-MyScript "EdgeMSI-Download-Only-Complete.ps1"
+Get-MyScript "Chrome-Download+Run-Installer.ps1" -EditFile
+Get-MyScript "WAC-Download+Install.ps1" -EditFile
+Get-MyScript "EdgeMSI-Download-Only-Complete.ps1" -EditFile
 Get-MyScript "Edge-InstallOnly.ps1"
