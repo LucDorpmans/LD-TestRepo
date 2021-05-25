@@ -11,5 +11,5 @@ Function Get-MyScript
 
 Get-MyScript "Chrome-Download+Run-Installer.ps1"
 Get-MyScript "WAC-Download+Install.ps1"
-Get-MyScript "EdgeMSI-DownloadComplete.ps1"
+Get-MyScript "EdgeMSI-Download-Only-Complete.ps1"
 Get-MyScript "Edge-InstallOnly.ps1"
