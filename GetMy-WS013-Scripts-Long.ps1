@@ -4,9 +4,10 @@ Function Get-MyScript
     Param    ( 
         [Parameter(Mandatory=$true,Position=0)]
         [string]$AFile,
-        [string]$SaveLocation = "$env:USERPROFILE\Downloads\"     )
+        [string]$SaveLocation = "$env:USERPROFILE\Downloads\", 
+		[switch]$EditScript = $True )
         Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/My-WS-013-Repo.git/main/$AFile"  -Outfile "$SaveLocation$AFile" 
-        PSEdit  ("$SaveLocation$AFile" }
+		If ($EditScript) { PSEdit  ("$SaveLocation$AFile" )} }
 
 Get-MyScript "Chrome-Download+Run-Installer.ps1"
 Get-MyScript "WAC-Download+Install.ps1"
