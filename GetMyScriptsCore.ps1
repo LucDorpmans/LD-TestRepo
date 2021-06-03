@@ -6,3 +6,6 @@ Function Get-MyScript { Param( [string]$AFile,[switch]$EditFile = $False,
 		
 Get-MyScript "PowerShell-Core-Download+Install.ps1" 
 Get-MyScript "WAC-Download+Install.ps1"
+
+
+
