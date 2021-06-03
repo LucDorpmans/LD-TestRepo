@@ -1,4 +1,4 @@
-# GetMy-WS013-Scripts-Long.ps1
+# GetMyScripts-Long.ps1
 Function Get-MyScript 
 {    [CmdletBinding()]
     Param    ( 
