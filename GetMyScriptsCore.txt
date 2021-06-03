@@ -1,3 +1,4 @@
 $MyScript = "GetMyScriptsCore.ps1"
 Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/TestRepo/main/$MyScript"  -Outfile "$env:USERPROFILE\Downloads\$MyScript"
-Get-Content ("$env:USERPROFILE\Downloads\$MyScript")
+& ("$env:USERPROFILE\Downloads\$MyScript")
+Get-ChildItem ("$env:USERPROFILE\Downloads\")
