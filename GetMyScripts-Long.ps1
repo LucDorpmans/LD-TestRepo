@@ -9,7 +9,7 @@ Function Get-MyScript
         Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/TestRepo/main/$AFile"  -Outfile "$SaveLocation$AFile" 
 		If ($EditFile) { PSEdit  ("$SaveLocation$AFile" )} }
 
-Get-MyScript "EdgeMSI-DownloadComplete.ps1"
+Get-MyScript "EdgeMSI-Download-Only-Complete.ps1"
 Get-MyScript "Edge-InstallOnly.ps1"
 Get-MyScript "Download+Install+PowerShell-Core.ps1" -EditFile
 Get-MyScript "WAC-Download+Install.ps1"
