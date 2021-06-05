@@ -1,51 +1,36 @@
-In this demonstration, you'll learn how to manage Windows Server 2019 with PowerShell and PowerShell DSC.
-Prerequisites
-A Microsoft Azure subscription
-An account with the Contributor or Owner role in the Azure subscription
-Microsoft Edge based on Chromium installed on an Azure virtual machine (VM) running Windows Server 2019.
-Windows Admin Center installed on the Azure VM by following steps described in Windows Admin Center. 
-Demonstration steps
-1.	On the Azure VM, open PowerShell ISE, copy the following content into the script pane (you might have to display it first), 
-	and then save it as C:\DemoFiles\IISConfig.ps1.
+﻿# 1. On the Azure VM, open PowerShell ISE, copy the file IISConfig.ps1 to $DemoFolderFull\
+$DemoFolderPath = "C:\"
+$DemoFolder = "Demo"
+$DemoFolderFull = "$DemoFolderPath$DemoFolder"
 
-   configuration IISConfig
-   {
-     Import-DscResource -Module 'xWebAdministration'
-     Import-DscResource -ModuleName 'PSDesiredStateConfiguration'
+$SourceFolder = "$env:USERPROFILE\Documents"
+$SourceFolder = "C:\PowerShellDSC"
 
-     node ("localhost") {
+New-Item -Name $DemoFolder -Path $DemoFolderPath -ItemType Directory 
+Copy-Item $SourceFolder\IISConfig.ps1 -Destination $DemoFolderFull\IISConfig.ps1 -Force
 
-       WindowsFeature IIS {
-          Ensure = "Present"
-          Name   = "Web-Server"
-       }
-       WindowsFeature AspNet45 {
-           Ensure = "Present"
-           Name   = "Web-Asp-Net45"
-       }
-       xWebsite DefaultSite {
-           Ensure       = "Present"
-           Name         = "Default Web Site"
-           State        = "Stopped"
-           PhysicalPath = "C:\inetpub\wwwroot"
-           DependsOn    = "[WindowsFeature]IIS"
-       }
-     }
-   }
-IISConfig -OutputPath:'C:\Demofiles\IISConfig'
+PSEdit $DemoFolderFull\IISConfig.ps1 
 
-2.	From the PowerShell ISE console pane, run the following command to install the xWebAdministration module:
-	Install-Module xWebAdministration -Verbose 
-	Note: When you receive a prompt to install NuGet provider, select Yes. When you receive a prompt to install the modules from PSGallery, select Yes to All.
-3.	In the PowerShell ISE, run the script you copied into the script pane.
-	Note the message displayed in the script pane, and then verify that the C:\DemoFiles\IISConfig\localhost.mof file has been successfully created.
-4.	From the PowerShell ISE console pane, run the following in order to apply the DSC configuration.
-5.	Start-DscConfiguration -Path 'C:\Demofiles\IISConfig' -Wait -Verbose 
-6.	Wait until the configuration is applied, and then verify that it completed successfully.
-7.	From the Server Manager window, start Internet Information Services (IIS) Manager, and then in its console, verify that the Default Web Site is stopped.
+# Prepare to download xWebAdministration without prompts
+Install-PackageProvider nuget -Force
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+# 2. From the PowerShell ISE console pane, run the following command to install the xWebAdministration module:
+Install-Module xWebAdministration -Verbose 
+#    Note: When you receive a prompt to install NuGet provider, select Yes. When you receive a prompt to install the modules from PSGallery, select Yes to All.
+
+# 3. Run the IISConfig script you copied into the script pane.
+Invoke-Expression $DemoFolderFull\IISConfig.ps1 
+
+#	 Note the message displayed in the script pane, and then verify that the $DemoFolderFull\IISConfig\localhost.mof file has been successfully created.
+PSEdit $DemoFolderFull\IISConfig\localhost.mof
+
+# 4. From the PowerShell ISE console pane, run the following in order to apply the DSC configuration.
+Start-DscConfiguration -Path '$DemoFolderFull\IISConfig' -Wait -Verbose 
+# 6. Wait until the configuration is applied, and then verify that it completed successfully.
+# 7. From the Server Manager window, start Internet Information Services (IIS) Manager, and then in its console, verify that the Default Web Site is stopped.
 
 
-
+Start-DscConfiguration -Path 'C:\Demo\IISConfigHardCoded' -Wait -Verbose -Force
 
 Start-DscConfiguration -Path 'C:\Demo\IISCleanUp' -Wait -Verbose -Force
 
@@ -57,6 +42,10 @@ Start-DscConfiguration -Path 'C:\Demo\IISInstall' -Wait -Verbose -Force
 
 $DSCConfig = 'IISRemove'
 Start-DscConfiguration -Path "C:\Demo\$DSCConfig" -Wait -Verbose -Force
+
+$DSCConfig = 'IISDemoConfig'
+Start-DscConfiguration -Path "C:\Demo\$DSCConfig" -Wait -Verbose -Force
+
 
 Get-Website
 
@@ -71,3 +60,4 @@ Remove-DscConfigurationDocument -Stage Previous
 Stop-DscConfiguration
 
 Get-ChildItem C:\Windows\System32\Configuration
+

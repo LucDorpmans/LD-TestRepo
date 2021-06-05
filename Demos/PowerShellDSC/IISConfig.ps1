@@ -22,4 +22,4 @@ configuration IISConfig
     }
   }
 }
-IISConfig -OutputPath:'C:\Demofiles\IISConfig'
+IISConfig -OutputPath:'C:\Demo\IISConfig'

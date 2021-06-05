@@ -1,4 +1,4 @@
-configuration IISConfig
+configuration IISDemoConfig
 {
      Import-DscResource -Module 'xWebAdministration'
      Import-DscResource -ModuleName 'PSDesiredStateConfiguration'
@@ -27,4 +27,4 @@ configuration IISConfig
           }
      }
 }
-IISConfig -OutputPath:'C:\Demofiles\IISConfig'
+IISDemoConfig -OutputPath:'C:\Demo\IISDemoConfig'
