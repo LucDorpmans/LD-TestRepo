@@ -9,7 +9,7 @@ PSEdit C:\DemoFiles\IISConfig.ps1
 Install-PackageProvider nuget -Force
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 # 2. From the PowerShell ISE console pane, run the following command to install the xWebAdministration module:
-Install-Module xWebAdministration -Verbose 
+Install-Module xWebAdministration -Verbose -Repository PSGallery
 #    Note: When you receive a prompt to install NuGet provider, select Yes. When you receive a prompt to install the modules from PSGallery, select Yes to All.
 
 # 3. Run the IISConfig script you copied into the script pane.

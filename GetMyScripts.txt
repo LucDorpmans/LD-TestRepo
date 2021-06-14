@@ -1,6 +1,9 @@
 # Download My GitHub Scripts:
 
 # Command to get my scripts from the GitHub:
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
 $MyScript = "GetMyScripts.ps1"
 Invoke-Webrequest -Uri "https://raw.githubusercontent.com/LucDorpmans/TestRepo/main/$MyScript"  -Outfile "$env:USERPROFILE\Downloads\$MyScript"
 PSEdit  ("$env:USERPROFILE\Downloads\$MyScript")
+
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
