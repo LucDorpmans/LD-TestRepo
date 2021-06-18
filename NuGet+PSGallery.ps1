@@ -1,6 +1,15 @@
-#[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
-Install-PackageProvider nuget -Force
+#[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls" # For older Windows versions
+If (!(Get-PackageProvider -Name Nuget)) { Install-PackageProvider nuget -Force } 
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Module xPSDesiredStateConfiguration -Verbose -Repository PSGallery
+Find-Module xDSC*
+# Install-Module xPSDesiredStateConfiguration -Verbose -Repository PSGallery
+Install-Module xDscDiagnostics -Verbose -Repository PSGallery
 
 # Get-DscResource
+
+If (!(Get-PackageProvider -Name Nuget)) {Write-Output "Yes"} else {Write-Output "No"}
+
+$NuProv = Get-PackageProvider -Name Nuget
+$NuProv.Version
+
+
