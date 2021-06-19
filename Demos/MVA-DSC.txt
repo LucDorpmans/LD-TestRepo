@@ -1,0 +1,10 @@
+If (!(Get-PackageProvider -Name Nuget)) { Install-PackageProvider nuget -Force } 
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+Install-Module -Name MVA_DSC_2015_DAY1 -Verbose 
+
+ise Initialize-MVA_DSC_2015
+
+Show-MVA_DSC_Examples -Day 1 -Module 5
+
+
