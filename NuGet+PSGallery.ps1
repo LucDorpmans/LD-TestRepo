@@ -7,7 +7,7 @@ Install-Module xDscDiagnostics -Verbose -Repository PSGallery
 
 # Get-DscResource
 
-If (!(Get-PackageProvider -Name Nuget)) {Write-Output "Yes"} else {Write-Output "No"}
+If (!(Get-PackageProvider -Name Nuget)) {Write-Output "No"} else {Write-Output "Yes"}
 
 $NuProv = Get-PackageProvider -Name Nuget
 $NuProv.Version
