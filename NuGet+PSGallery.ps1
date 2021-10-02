@@ -2,16 +2,13 @@
 $OrgVerbosePreference = $VerbosePreference 
 $VerbosePreference = "Continue"
 
-If ((Get-PackageProvider -Name PowerShellGet -ListAvailable)) {
-    $NuProv = Get-PackageProvider -Name Nuget
-    Write-Verbose "NuGet PackageProvider version $($NuProv.Version) installed" 
-} 
-Else {
+$Res = Get-PackageProvider NuGet -EA SilentlyContinue$Res 
+If ($Null -eq $Res) { 
     Write-Verbose "Not installed, installing"
-    { Install-PackageProvider nuget -Force } 
-    Write-Verbose "Installed  (if no errors)"
+    Install-PackageProvider nuget -Force 
 }
-
+$NuProv = Get-PackageProvider -Name Nuget
+Write-Verbose "NuGet PackageProvider version $($NuProv.Version) installed" 
 
 If ( (Get-PSRepository PSGallery).InstallationPolicy -eq "Trusted" )  {
     Write-Verbose "PsGallery already trusted" } 
