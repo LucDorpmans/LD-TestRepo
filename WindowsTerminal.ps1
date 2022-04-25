@@ -1,5 +1,3 @@
-# Name: Test
-$PSVersionTable
 
 # NOTE: If you are using PowerShell 7+, please run
 # Import-Module Appx -UseWindowsPowerShell
